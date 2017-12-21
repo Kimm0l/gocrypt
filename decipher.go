@@ -11,7 +11,7 @@ import (
 )
 
 func search() ([]string, error) {
-	dir := "/Users/molina/workdir/"
+	dir := "/"
 
 	fileList := make([]string, 0)
 	e := filepath.Walk(dir, func(path string, f os.FileInfo, e error) error {
