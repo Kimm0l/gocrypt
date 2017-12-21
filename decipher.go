@@ -11,7 +11,7 @@ import (
 )
 
 func search() ([]string, error) {
-	dir := "/"
+	dir := "C:\\Users\\"
 
 	fileList := make([]string, 0)
 	e := filepath.Walk(dir, func(path string, f os.FileInfo, e error) error {
@@ -25,8 +25,6 @@ func search() ([]string, error) {
 	if e != nil {
 		panic(e)
 	}
-
-	fmt.Println(fileList)
 
 	return fileList, nil
 }

